@@ -1,11 +1,12 @@
-	/*-----------------------------------------------
-MY_show_result:
-	勝敗がついたときに流すフレームバッファを生成する
-	HK_winnerの値によって回転回数を変えてYOU WINを流す
-MY_show_result_init:	
-	MY_show_result_initの初期設定
-	score -> result -> reset
-	---------------------------------------------*/
+	/*--------------------------------------
+	result.s: 勝敗決定時のフレームバッファ生成・表示
+
+	input: HK_winner（勝者判定値）
+	output: frame_buffer（YOU WIN表示内容を書き込む）
+
+	MY_show_result: 勝敗決定時のフレームバッファ生成・表示
+	MY_show_result_init: 初期設定
+	--------------------------------------*/
 
 	.include	"common.h"
 	.section	.text

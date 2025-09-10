@@ -1,9 +1,13 @@
-/*-----------------------------------------------------------------
-input: frame_buffer
-return:ない！！
-HK_display: 8ms 周期で matrixLED を光らせる
-HK_fb_clear: frame_buffer を全て 0 にする
----------------------------------------------------------------------*/
+/*--------------------------------------
+display.s: LEDマトリクス表示・frame_buffer制御
+HK_display: 8ms周期でmatrixLEDを光らせる
+input: なし
+output: なし
+
+HK_fb_clear: frame_bufferを全て0にする
+input: なし
+output: frame_buffer（表示内容の制御・消去）
+--------------------------------------*/
 
 	.include	"common.h"
 	.section	.text

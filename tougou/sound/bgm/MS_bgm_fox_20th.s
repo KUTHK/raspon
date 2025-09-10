@@ -1,3 +1,11 @@
+/*--------------------------------------
+MS_bgm_fox_20th.s: FOX 20th BGMのデータ・テンポ・音長定義
+
+input: なし（BGMデータ定義）
+output: MS_fox_20th（BGMデータ配列）
+
+PWM_HZ, TIMER_HZ, BPM, 各音長(whole, half, quarter, etc)を定義
+--------------------------------------*/
 	.equ	PWM_HZ, 9600*1000
 	.equ	TIMER_HZ, 1000 * 1000
 	.equ	BPM, 180	@ bmp=60, quarter -> 1sec, half -> 2sec

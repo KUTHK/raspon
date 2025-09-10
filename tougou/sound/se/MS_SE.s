@@ -1,3 +1,8 @@
+/*--------------------------------------
+MS_SE: 効果音(SE)のデータ定義
+
+wall, board などのSEデータを格納
+--------------------------------------*/
 	.include "common.h"
 	.include "sound_source.h"
 	.section .data

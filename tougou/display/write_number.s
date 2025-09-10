@@ -1,8 +1,14 @@
-/*-----------------------------
-input: HK_write_number_in に表示したい値
-HK_write_number: input の 1 桁目まで frame_buffer に書き込み
-HK_write_numbers: input の 2 桁目まで frame_buffer に書き込み
-----------------------------------*/
+
+/*--------------------------------------
+write_number.s: 数値表示・frame_buffer書き込み
+
+input: HK_write_number_in（表示したい値）
+output: frame_buffer（表示内容を書き込む）
+
+HK_write_number: 1桁表示
+HK_write_numbers: 2桁表示
+--------------------------------------*/
+
 
 
 	.include	"common.h"

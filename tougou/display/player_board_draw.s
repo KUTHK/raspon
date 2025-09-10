@@ -1,3 +1,11 @@
+/*--------------------------------------
+player_board_draw.s: プレイヤーボード描画・frame_buffer反映
+
+input: TS_player1_board, TS_player2_board（各プレイヤーボードの状態）
+output: frame_buffer（描画内容を書き込む）
+
+TS_player1_board_draw, TS_player2_board_draw: 各プレイヤーボードをframe_bufferに描画
+--------------------------------------*/
 	@ player1とplayer2をディスプレイ上に描画するための途中
 	@ TS_player1_boardとTS_player2_boardをframe_bufferに書き込む
 	@ player_boardの後に呼び出すと良い

@@ -1,3 +1,11 @@
+/*--------------------------------------
+MS_bgm_list.s: BGMデータのアドレス・長さリスト
+
+input: 各BGMデータ
+output: MS_bgm_list, MS_bgm_len_list（BGMアドレス・長さリスト）
+
+各BGMデータのアドレスと長さを管理
+--------------------------------------*/
 	.section .data
 	.global  MS_bgm_list
 MS_bgm_list:

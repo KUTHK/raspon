@@ -1,14 +1,10 @@
 /*--------------------------------------
-HK_winner を呼び出して勝敗を確認してね
+point.s: 得点管理・勝者判定・加算処理
 
-input: なし!
-得点: HK_point1, HK_point2 (global)
-HK_win_point: 勝利に必要な得点
-HK_winner: 勝者 0: 決着が付いていない 1: player1 の勝利 2: player2 の勝利
+input: なし（内部でグローバル変数を参照）
+output: HK_point1, HK_point2, HK_winner（得点・勝者情報）
 
-HK_add_point1: player1 の得点を 1 加算 HK_win_point 以上になれば HK_winner に 1 を入れる
-HK_add_point2: player2 の得点を 1 加算 HK_win_point 以上になれば HK_winner に 2 を入れる
-HK_reset_point: player1, player2 の得点, HK_winner を 0 にする
+HK_winner: 勝敗判定, HK_add_point1/2: 得点加算, HK_reset_point: リセット
 --------------------------------------*/
 
 	.include	"common.h"

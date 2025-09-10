@@ -1,14 +1,11 @@
-	/*---------------------------------------
-MY_rotate_90:
-	frame_bufferの値を90度回転させる
-	MY_rotate_90_nに入れた値で回転回数を指定
-transpose_buffer:	
-	frame_bufferの値を転置させる
-MY_x_rotate_buffer:
-	frame_bufferの値をx軸対象で回転
-MY_y_rotate_buffer:	
-	frame_bufferの値をy軸対象で回転
-	---------------------------------------------*/
+/*--------------------------------------
+rotate.s: frame_buffer回転・転置・軸反転
+
+input: frame_buffer, MY_rotate_90_n（回転回数）
+output: frame_buffer（回転・転置後の値）
+
+MY_rotate_90, transpose_buffer, MY_x_rotate_buffer, MY_y_rotate_buffer: 各種回転・転置処理
+--------------------------------------*/
 
 	.include	"common.h"
 	.section	.text

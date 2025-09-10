@@ -1,7 +1,11 @@
 /*--------------------------------------
-start 画面
-HK_start: start 画面を流す
-HK_start_init: start になる状態推移時に呼び出す(初期設定)
+start.s: スタート画面表示
+
+input: HK_update_text_address（表示テキストアドレス）
+output: frame_buffer（スタート画面表示内容を書き込む）
+
+HK_start: スタート画面表示
+HK_start_init: スタート画面用の初期設定
 --------------------------------------*/
 
 	.include	"common.h"

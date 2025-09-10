@@ -1,3 +1,11 @@
+/*--------------------------------------
+MS_bgm_saria.s: サリアBGMのデータ・テンポ・音長定義
+
+input: なし（BGMデータ定義）
+output: MS_saria（BGMデータ配列）
+
+PWM_HZ, TIMER_HZ, BPM, 各音長(whole, half, quarter, etc)を定義
+--------------------------------------*/
 	.equ	PWM_HZ, 9600*1000
 	.equ	TIMER_HZ, 1000 * 1000
 	.equ	BPM, 140	@ bmp=60, quarter -> 1sec, half -> 2sec

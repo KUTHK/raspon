@@ -1,3 +1,11 @@
+/*--------------------------------------
+ball.s: ボール制御・座標・衝突・初期化・状態管理
+
+input: KT_ball_init_player1/2, KT_ball_player1_pushed, KT_ball_player2_pushed など
+output: KT_ball_pos_x, KT_ball_pos_y, KT_collision など（ボール状態）
+
+KT_ball_init, KT_ball_move, KT_ball_pos_x/y, KT_collision などボール関連処理
+--------------------------------------*/
 	@ ボールの制御用タスク
 	@ アクセスするデータ 各プレイヤーの位置,framebuffer
 	@ KT_ball_init ball.sで利用する変数の初期化

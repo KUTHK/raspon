@@ -1,5 +1,11 @@
- /*ゴール判定をする関数。戻り値はOS_goalJudg_out。ゴールしてるとき1,ゴールしてないとき0
-  */
+/*--------------------------------------
+GoalJudg.s: ゴール判定・出力管理
+
+input: KT_ball_pos_y（ボールY座標）
+output: OS_goalJudg_out（ゴール判定結果）
+
+OS_goalJudg: ゴールしているとき1, していないとき0を返す
+--------------------------------------*/
  
     .include "common.h"
 	.section .init

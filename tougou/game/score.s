@@ -1,13 +1,12 @@
-	/*-----------------------------------------------
-MY_show_score:
-	1pと2pのスコアを表示する
-	HK_point_1p
-	HK_point_2p
-	TS_switch_outが0以外だったら終わり
-MY_check_score:	
-	どちらかが勝っているかそうでないかでmain_statusの値を書き換えるサブルーチン
-	score -> result -> reset
-	---------------------------------------------*/
+/*--------------------------------------
+score.s: スコア表示・勝敗判定・状態遷移
+
+input: HK_point1, HK_point2（各プレイヤー得点）
+output: HK_write_number_in, frame_buffer（スコア表示）
+
+MY_show_score: 1P/2Pスコア表示
+MY_check_score: 勝敗判定・状態遷移（score→result→reset）
+--------------------------------------*/
 
 	.include	"common.h"
 	.section	.text

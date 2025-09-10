@@ -1,6 +1,12 @@
-	@ SEを奏でるプログラム
-	@ KT_collision の値を取得し音を鳴らす, その後KT_collisionを初期化(-1)
-	
+/*--------------------------------------
+MS_play_SE: 効果音(SE)を再生するメイン処理
+	- KT_collisionの値に応じて壁/反射板SEを再生し、再生後はKT_collisionを初期化(-1)
+	- SEの再生状態はMS_SE_statusで管理
+	- PWMレジスタを直接操作して音を出力
+
+MS_play_SE_init: SE再生状態やタイマー等の初期化
+MS_SE_status: SEの再生状態(0:off, 1:on)
+--------------------------------------*/
 	.include "common.h"
 	.include "sound_source.h"
 	.section .text

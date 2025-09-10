@@ -1,8 +1,13 @@
-	@ BGMを奏でるプログラム(繰り返し鳴り続ける)
-	@ BGMを開始するときに MS_play_bgm_target_time を現在時刻で初期化
-	@ 	-> MS_set_bgm_target
-	@ MS_SE_status を読み取り，SEと音がかぶらないように処理
-	@ bgm_offset に曲目, step_offset に曲の進行状況を保存
+/*--------------------------------------
+MS_play_bgm.s: BGMを再生するプログラム（繰り返し鳴り続ける）
+
+input: MS_play_bgm_target_time, MS_SE_status, bgm_offset, step_offset
+output: PWM, BGM再生状態
+
+MS_set_bgm_target: BGMを開始する時にMS_play_bgm_target_timeを現在時刻で初期化
+MS_SE_statusを読み取り、SEと音がかぶらないように処理
+bgm_offsetに曲目, step_offsetに曲の進行状況を保存
+--------------------------------------*/
 	
 	.include "common.h"
 	.section .text

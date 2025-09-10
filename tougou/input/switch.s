@@ -1,3 +1,11 @@
+/*--------------------------------------
+switch.s: スイッチ入力取得・状態保存・初期化
+
+input: GPIO（スイッチ状態）, TS_switch_out（保存用変数）
+output: TS_switch_out（スイッチ状態）, TS_cool_time（クールタイム）
+
+TS_switch, TS_switch_out, TS_switch_save, TS_cool_time: 各種スイッチ処理
+--------------------------------------*/
 @スイッチが押されているかを返すプログラム
 @TS_switch_outに下位bitから順にボタンの押下情報を保持
 @TS_switch_out>0ならどれかのボタンが押されてる,ボタンnを判定したい場合TS_switch_outと必要な値のtstを取れば良い
