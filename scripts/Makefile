@@ -1,18 +1,59 @@
-AS = arm-none-eabi-as
-LD = arm-none-eabi-ld
-LDFLAGS = -m armelf
-OC = arm-none-eabi-objcopy
-OCFLAGS = -O binary
+# ========= 基本設定 =========
+CROSS      ?= arm-none-eabi
+AS         := $(CROSS)-gcc
+LD         := $(CROSS)-gcc
+OBJDUMP    := $(CROSS)-objdump
+OBJCOPY    := $(CROSS)-objcopy
 
-%.o: %.s
-	$(AS) $< -o $@
+TARGET     := raspon.elf
+MAP        := raspon.map
 
-%.elf: main.o display.o GPIO_init.o PWM_init.o ball.o player_board.o player_board_draw.o switch.o GoalJudg.o MS_play_bgm.o MS_play_SE.o MS_bgm_list.o MS_bgm_fox_20th.o MS_bgm_flashman.o MS_bgm_title.o MS_bgm_saria.o MS_SE.o score.o point.o rotate.o write_number.o start.o text.o result.o
-	$(LD) $(LDFLAGS) main.o display.o GPIO_init.o PWM_init.o ball.o player_board.o player_board_draw.o switch.o GoalJudg.o MS_play_bgm.o MS_play_SE.o MS_bgm_list.o MS_bgm_fox_20th.o MS_bgm_flashman.o MS_bgm_title.o MS_bgm_saria.o MS_SE.o score.o point.o rotate.o write_number.o start.o text.o result.o -o$@
-main.img: main.elf
-	$(OC) $+ $(OCFLAGS) $@
+# ========= ディレクトリ =========
+SRC_ROOT   := src
+BUILD_DIR  := build
 
+# ========= ソース自動収集 (.s) =========
+ASM_SRCS   := $(shell find $(SRC_ROOT) -type f -name '*.s')
+# 例: src/init/GPIO_init.s → build/src/init/GPIO_init.o
+OBJS       := $(patsubst %.s,$(BUILD_DIR)/%.o,$(ASM_SRCS))
 
-.PHONY: clean
+# ========= インクルードパス =========
+INCLUDES   := -I$(SRC_ROOT)/include -I$(SRC_ROOT)/audio/data
+
+# ========= フラグ（必要に応じて修正） =========
+ASFLAGS    := -mcpu=cortex-m0 -mthumb -O2 $(INCLUDES)
+LDFLAGS    := -mcpu=cortex-m0 -mthumb -nostartfiles -Wl,-Map=$(MAP)
+
+# ========= ルール =========
+.PHONY: all clean tree
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+    @echo "[LD]  $@"
+    $(LD) $(LDFLAGS) -o $@ $(OBJS)
+
+# 各オブジェクト: build/ + ソースの相対パス
+$(BUILD_DIR)/%.o: %.s
+    @mkdir -p $(dir $@)
+    @echo "[AS]  $<"
+    $(AS) $(ASFLAGS) -c $< -o $@
+
+# ツリー表示（確認用）
+tree:
+    @echo "ASM_SRCS:"
+    @printf '%s\n' $(ASM_SRCS)
+    @echo ""
+    @echo "OBJS:"
+    @printf '%s\n' $(OBJS)
+
 clean:
-	rm -f *.o *.elf *.img
+    @echo "[CLEAN]"
+    rm -rf $(BUILD_DIR) $(TARGET) $(MAP)
+
+# ========= 追加（バイナリ/HEXが必要なら） =========
+bin: $(TARGET)
+    $(OBJCOPY) -O binary $(TARGET) raspon.bin
+
+hex: $(TARGET)
+    $(OBJCOPY) -O ihex $(TARGET) raspon.hex
