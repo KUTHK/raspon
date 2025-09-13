@@ -1,30 +1,33 @@
 # GPIO の基本
 
-入力と出力を自由に設定できるピンです。
+冒頭: 入力と出力を自由に設定できるピンを直接制御して、LED点灯やスイッチ入力を扱えるようにする。
 
-## 出力(LED点灯)
+## 簡単（初心者向け）
 
-- GPFSELでピン機能を「出力」に設定し、GPSET/GPCLRでHigh/Lowを切り替えます。
+- LED: 出力に設定 → ビットを立てると点灯、消すと消灯。
+- スイッチ: 入力に設定 → 入力レジスタの該当ビットを読む。
 
 ```asm
   .include "src/include/common.h"
   ldr r0, =GPIO_BASE
   mov r1, #1
-  lsl r1, r1, #LED_PORT     @ LEDピンのビットマスク
-  str r1, [r0, #GPSET0]     @ 点灯
+  lsl r1, r1, #LED_PORT
+  str r1, [r0, #GPSET0]   @ 点灯
 ```
 
-## 入力(スイッチ)
+## 普通（上級者向け）
 
-- GPFSELで「入力」に。レベルはGPLEV0を読みます。
+- GPFSELx で機能選択（3bit/ピン）。出力は GPSET0/GPCLR0、入力は GPLEV0 を読む。
+- 複数ピンはビットORで同時制御。入出力の遅延はメモリ書き込み/読み込みタイミングに依存。
 
 ```asm
   .include "src/include/common.h"
   ldr r0, =GPIO_BASE
-  ldr r1, [r0, #GPLEV0]
-  mov r2, #1
-  lsl r2, r2, #SW1_PORT
-  and r3, r1, r2            @ r3!=0 で押下
+  mov r1, #((1 << LED_PORT) | (1 << COL1_PORT))
+  str r1, [r0, #GPSET0]   @ 複数ピン同時にHigh
+  ldr r2, [r0, #GPLEV0]   @ 入力サンプリング
+  tst r2, #(1 << SW1_PORT)
+  bne handle_pressed
 ```
 
-まとめ: 機能設定(GPFSEL)→出力はGPSET/GPCLR、入力はGPLEVを読む、が基本形。
+まとめ: GPFSELで機能設定→出力はGPSET/GPCLR、入力はGPLEV。必要なら複数ビットで一括制御。
